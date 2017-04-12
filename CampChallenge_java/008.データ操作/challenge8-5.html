@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>入力フォーム</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <form action="./challenge8-5.jsp" method="post">
+            名前<br>
+            　<input type="text" name="name_box" value=""><br>
+            性別<br>
+            　男<input type="radio" name="sex_box" value="1">女<input type="radio" name="sex_box" value="2"><br>
+            趣味：<br>
+            　<textarea name="hobby_box"></textarea><br>
+             
+            <input type="submit" name="button" value="送信">
+        </form>
+        
+        <script>
+            function getCookie(name){
+                var c = "c_"+name+"=";
+                var allcookies = document.cookie;
+                var position = allcookies.indexOf(c);
+
+                if( position != -1 ){
+                    var startIndex = position + (c.length);
+                    var endIndex = allcookies.indexOf(';', startIndex);
+                }
+                if( endIndex == -1 ){
+                    endIndex = allcookies.length;
+                }
+                r = decodeURIComponent(allcookies.substring(startIndex,endIndex));
+                return r;
+            }
+            
+            document.getElementsByName("name_box")[0].value = getCookie("name_box");
+            document.getElementsByName("sex_box")[getCookie("sex_box")-1].checked = true;
+            document.getElementsByName("hobby_box")[0].value = getCookie("hobby_box");
+        </script>
+    </body>
+</html>
