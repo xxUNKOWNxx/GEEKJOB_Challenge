@@ -22,6 +22,9 @@
         自己紹介:<%= hs.getAttribute("comment")%><br>
         上記の内容で登録します。よろしいですか？
         <form action="insertresult" method="POST">
+            <!----- タスク2 ----->
+            <input type="hidden" name="ac"  value="<%= hs.getAttribute("ac")%>">
+            <!----- タスク2 ----->
             <input type="submit" name="yes" value="はい">
         </form>
     <% }else{ %>
