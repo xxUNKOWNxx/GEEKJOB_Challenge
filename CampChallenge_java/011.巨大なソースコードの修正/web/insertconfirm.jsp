@@ -49,7 +49,10 @@
         <!----- タスク2 ----->
            <input type="hidden" name="ac"  value="<%= hs.getAttribute("ac")%>">
         <!----- タスク2 ----->
+        
+        <!----- タスク3 ----->
            <% session.setAttribute("udb", udb); %>
+        <!----- タスク3 ----->
            <input type="submit" name="yes" value="はい">
        </form>
    <% }else{ %>
@@ -77,10 +80,13 @@
     } %>
 <!----- タスク4 ----->   
         <form action="insert" method="POST">
+        <!----- タスク5 ----->
+            <% session.setAttribute("udb", udb); %>
+        <!----- タスク5 ----->
             <input type="submit" name="no" value="登録画面に戻る">
         </form>
     <!----- タスク1 ----->
         <%=JumsHelper.getInstance().home()%>
-        <!----- タスク1 ----->
+    <!----- タスク1 ----->
     </body>
 </html>

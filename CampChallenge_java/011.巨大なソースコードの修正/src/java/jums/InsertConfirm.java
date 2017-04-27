@@ -1,6 +1,7 @@
 package jums;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,20 +38,38 @@ public class InsertConfirm extends HttpServlet {
             }
             
             //-----タスク3-----
-            UserDataBeans userdata = new UserDataBeans();
-            userdata.setName(request.getParameter("name"));
-            Calendar birthday = Calendar.getInstance();
-            userdata.setBirthday(birthday.getTime());
-            userdata.setType((request.getParameter("type") == null) ? 0 : (Integer.parseInt(request.getParameter("type"))));
-            userdata.setTell(request.getParameter("tell"));
-            userdata.setComment(request.getParameter("comment"));
+                UserDataBeans userdata = new UserDataBeans();
+                userdata.setName(request.getParameter("name"));
+
+                //-----タスク4-----
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    if(request.getParameter("year").equals("") || request.getParameter("month").equals("") || request.getParameter("day").equals("")){
+                        userdata.setBirthday(new java.sql.Date(dateFormat.parse("1000-01-01").getTime()));
+                    }else{
+                        Calendar birthday = Calendar.getInstance();
+                        userdata.setBirthday(birthday.getTime());
+                    }
+                //-----タスク4-----
+
+                userdata.setType((request.getParameter("type") == null) ? 0 : (Integer.parseInt(request.getParameter("type"))));
+                userdata.setTell(request.getParameter("tell"));
+                userdata.setComment(request.getParameter("comment"));
+                
             //-----タスク3-----
+            
             System.out.println("Session updated!!");
             
             //-----タスク3-----            
-            session.setAttribute("udb", userdata);
+                session.setAttribute("udb", userdata);
             //-----タスク3-----
             
+            //-----タスク5-----
+                //入力された値を保持しておくためにセッションに格納
+                session.setAttribute("year", request.getParameter("year"));
+                session.setAttribute("month", request.getParameter("month"));
+                session.setAttribute("day", request.getParameter("day"));
+            //-----タスク5-----
+                
             request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", e.getMessage());
