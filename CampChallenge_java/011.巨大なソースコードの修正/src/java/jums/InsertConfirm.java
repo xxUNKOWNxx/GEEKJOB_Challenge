@@ -2,7 +2,6 @@ package jums;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,8 +45,9 @@ public class InsertConfirm extends HttpServlet {
                     if(request.getParameter("year").equals("") || request.getParameter("month").equals("") || request.getParameter("day").equals("")){
                         userdata.setBirthday(new java.sql.Date(dateFormat.parse("1000-01-01").getTime()));
                     }else{
-                        Calendar birthday = Calendar.getInstance();
-                        userdata.setBirthday(birthday.getTime());
+                        //-----タスク6-----
+                            userdata.setBirthday(new java.sql.Date(dateFormat.parse(request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day")).getTime()));
+                        //-----タスク6-----
                     }
                 //-----タスク4-----
 
