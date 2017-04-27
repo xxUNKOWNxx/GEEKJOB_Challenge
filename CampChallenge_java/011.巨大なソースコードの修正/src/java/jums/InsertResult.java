@@ -2,7 +2,6 @@ package jums;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,18 +39,30 @@ public class InsertResult extends HttpServlet {
                 throw new Exception("不正なアクセスです");
             }
             //-----タスク2-----
-
+            
             //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
+            //-----タスク3-----
+            UserDataBeans userdata_local = (UserDataBeans)session.getAttribute("udb");
             UserDataDTO userdata = new UserDataDTO();
-            userdata.setName((String)session.getAttribute("name"));
-            Calendar birthday = Calendar.getInstance();
-            userdata.setBirthday(birthday.getTime());
-            userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
-            userdata.setTell((String)session.getAttribute("tell"));
-            userdata.setComment((String)session.getAttribute("comment"));
+
+            userdata.setName(userdata_local.getName());
+            userdata.setBirthday(userdata_local.getBirthday());
+            userdata.setType(userdata_local.getType());
+            userdata.setTell(userdata_local.getTell());
+            userdata.setComment(userdata_local.getComment());
+            //-----タスク3-----
+            
+//            //ユーザー情報に対応したJavaBeansオブジェクトに格納していく
+//            UserDataDTO userdata = new UserDataDTO();
+//            userdata.setName((String)session.getAttribute("name"));
+//            Calendar birthday = Calendar.getInstance();
+//            userdata.setBirthday(birthday.getTime());
+//            userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
+//            userdata.setTell((String)session.getAttribute("tell"));
+//            userdata.setComment((String)session.getAttribute("comment"));
             
             //DBへデータの挿入
-            UserDataDAO .getInstance().insert(userdata);
+            UserDataDAO.getInstance().insert(userdata);
             
             request.getRequestDispatcher("/insertresult.jsp").forward(request, response);
         }catch(Exception e){

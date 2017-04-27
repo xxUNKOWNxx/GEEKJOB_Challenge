@@ -2,9 +2,11 @@
 <!----- タスク1 ----->
 <%@page import="jums.JumsHelper" %>
 <!----- タスク1 ----->
-<%
-    HttpSession hs = request.getSession();
-%>
+
+<!----- タスク3 ----->
+<%@page import="jums.UserDataBeans" %>
+<jsp:useBean id="udb" class="jums.UserDataBeans" scope="session"/>
+<!----- タスク3 ----->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,11 +16,13 @@
     </head>
     <body>
         <h1>登録結果</h1><br>
-        名前:<%= hs.getAttribute("name")%><br>
-        生年月日:<%= hs.getAttribute("year")+"年"+hs.getAttribute("month")+"月"+hs.getAttribute("day")+"日"%><br>
-        種別:<%= hs.getAttribute("type")%><br>
-        電話番号:<%= hs.getAttribute("tell")%><br>
-        自己紹介:<%= hs.getAttribute("comment")%><br>
+        <!----- タスク3 ----->
+        名前:<jsp:getProperty name="udb" property="name"/><br>
+        生年月日:<jsp:getProperty name="udb" property="birthday"/><br>
+        種別:<jsp:getProperty name="udb" property="type"/><br>
+        電話番号:<jsp:getProperty name="udb" property="tell"/><br>
+        自己紹介:<jsp:getProperty name="udb" property="comment"/><br>
+        <!----- タスク3 ----->
         以上の内容で登録しました。<br>
     </body>
     
